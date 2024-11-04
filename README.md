@@ -1,18 +1,21 @@
-## Getting Started
+# FileSystem Class Complexity Summary
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+This document provides a summary of the time and space complexity for each method in the `FileSystem` class.
 
-## Folder Structure
+| Function              | Description                                   | Time Complexity                    | Space Complexity                 |
+|-----------------------|-----------------------------------------------|------------------------------------|----------------------------------|
+| `addFile`             | Adds a new file under specified parent dir    | \(O(1)\)                           | \(O(1)\)                         |
+| `addDir`              | Adds a new directory under specified parent   | \(O(1)\)                           | \(O(1)\)                         |
+| `getSizeOfFile`       | Returns the size of the specified file        | \(O(1)\)                           | \(O(1)\)                         |
+| `getMaxSizeFile`      | Returns name of the file with the maximum size| \(O(1)\)                           | \(O(1)\)                         |
+| `showFileSystem`      | Displays structure of the file system         | \(O(n)\), \(n =\) total entities   | \(O(h)\), \(h =\) tree height    |
+| `delete` (file)       | Deletes a file                                | \(O(1)\) or \(O(m)\)*              | \(O(1)\)                         |
+| `delete` (directory)  | Deletes a directory and its descendants       | \(O(n)\)** or \(O(m)\)*            | \(O(n)\) for deleting directory  |
+| `getNewBiggestFile`   | Finds and updates the largest file in system  | \(O(m)\), \(m =\) total files      | \(O(1)\)                         |
 
-The workspace contains two folders by default, where:
+### Notes
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+- **For `delete`**:
+    - If the file or directory being deleted is the largest file, the time complexity includes an \(O(m)\) operation for re-evaluating the largest file.
+    - For directory deletion, `O(n)` denotes removing all descendants recursively.
+  
