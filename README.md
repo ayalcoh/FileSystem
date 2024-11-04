@@ -1,10 +1,8 @@
 # FileSystem Class Complexity Summary
 
-This document provides a summary of the time and space complexity for each method in the `FileSystem` class.
-
 | Function              | Description                                   | Time Complexity                    | Space Complexity                 |
 |-----------------------|-----------------------------------------------|------------------------------------|----------------------------------|
-| `addFile`             | Adds a new file under specified parent dir    | \(O(1)\)                           | \(O(1)\)                         |
+| `addFile`             | Adds a new File under the Directory branch    | \(O(1)\)                           | \(O(1)\)                         |
 | `addDir`              | Adds a new directory under specified parent   | \(O(1)\)                           | \(O(1)\)                         |
 | `getSizeOfFile`       | Returns the size of the specified file        | \(O(1)\)                           | \(O(1)\)                         |
 | `getMaxSizeFile`      | Returns name of the file with the maximum size| \(O(1)\)                           | \(O(1)\)                         |
@@ -15,7 +13,10 @@ This document provides a summary of the time and space complexity for each metho
 
 ### Notes
 
+This time complexity assuming that getSizeOfFile function is being called more frequently then the delete function.
+Deleting a file can also be `O(1)` in every call but it will cost with more running time for the getSizeOfFile function.
+
 - **For `delete`**:
-    - If the file or directory being deleted is the largest file, the time complexity includes an \(O(m)\) operation for re-evaluating the largest file.
+    - If the file or the directory that has the largest file is being deleted, the time complexity includes an `O(m)` operation for re-evaluating the largest file.
     - For directory deletion, `O(n)` denotes removing all descendants recursively.
   
