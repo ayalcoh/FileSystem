@@ -124,8 +124,8 @@ public class FileSystem {
 
     /*
      -Deletes the file or directory
-     -Time Complexity for file: O(1) or O(m) if its the largest File, m = total number of files in dataMap
-     -Time Complexity for directory: O(n) or O(m) if largestFile is included, n = total number of entites 
+     -Time Complexity for file: O(1) for regular files, O(n) only if deleting biggest file
+     -Time Complexity for directory: O(n)
      -Space Complexity: O(n) for directory deletion
     */
 
@@ -204,7 +204,7 @@ public class FileSystem {
             System.out.print("\nEnter your choice (1-7): ");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine(); 
 
             switch (choice) {
                 case 1:

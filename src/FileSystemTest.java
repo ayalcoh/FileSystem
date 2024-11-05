@@ -28,7 +28,7 @@ public class FileSystemTest {
         assertEquals(100, size);
         System.out.println("Verified file size is 100");
         
-        System.out.println("Test completed successfully!");
+        System.out.println("Test completed!");
     }
     
     @Test
@@ -92,7 +92,6 @@ public class FileSystemTest {
         System.out.println("Test completed!");
     }
 
-    // Additional comprehensive tests
     @Test
     public void testDeepDirectoryStructure() {
         System.out.println("Running: Deep Directory Structure Test");
