@@ -5,10 +5,13 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Scanner;
 
+
+
 public class FileSystem {
     private Directory root;
     private Map<String, FileSystemEntity> dataMap;
     private File biggestFileSize;
+
     
     public FileSystem() {
         this.root = new Directory("root");
@@ -81,7 +84,7 @@ public class FileSystem {
     public long getSizeOfFile(String fileName) {
         FileSystemEntity data = dataMap.get(fileName);
         if (data == null || !(data instanceof File)) {
-            throw new IllegalArgumentException("File not found");  
+            throw new IllegalArgumentException("File not found" + fileName);  
         }
         return ((File) data).getSize();
     }
@@ -108,15 +111,15 @@ public class FileSystem {
     }
 
     private void showFileSystemRecursive(FileSystemEntity entity, String indent) {
-        System.out.println(entity.getDetails(indent));
+        System.out.println(indent + "- " + entity.getName() + 
+            (entity instanceof File ? " (size: " + ((File) entity).getSize() + " bytes)" : ""));
+        
         if (entity instanceof Directory) {
-            String newIndent = indent + "";
             Directory dir = (Directory) entity;
             for (FileSystemEntity child : dir.getChild().values()) {
-                showFileSystemRecursive(child, newIndent);
+                showFileSystemRecursive(child, indent + "  ");
             }
         }
-     
     }
 
     /*
@@ -136,10 +139,11 @@ public class FileSystem {
             throw new IllegalArgumentException("Cannot delete root directory");
         }
 
+
         Directory dirParent = (Directory) entity.getParent();
         dirParent.removeChild(name);
 
-        // in case of its directory need to remove all descendants from dataMap
+        // Directory case always O(n)
         if (entity instanceof Directory) {
             Queue<Directory> que = new LinkedList<>();
             que.offer((Directory) entity);
@@ -159,9 +163,9 @@ public class FileSystem {
         } else if (entity instanceof File && entity == biggestFileSize) {
             biggestFileSize = null;
         }
-        
+        //Not biggest file then O(1)
         dataMap.remove(name);
-
+        // Biggest file case O(n) 
         if (biggestFileSize == null) {
             getNewBiggestFile();
         }
@@ -231,9 +235,9 @@ public class FileSystem {
                     String file = scanner.nextLine();
                     long size = fs.getSizeOfFile(file);
                     if (size != -1) {
-                        System.out.println("Size of " + file + ": " + size + " bytes");
+                        System.out.println("\nSize of " + file + ": " + size + " bytes");
                     } else {
-                        System.out.println("File not found!");
+                        System.out.println("\nFile not found!");
                     }
                     break;
 

@@ -11,7 +11,7 @@ class Directory extends FileSystemEntity {
     }
 
     public void addChild(FileSystemEntity entity) {
-        entity.setData(this);
+        entity.setRoot(this);
         child.put(entity.getName(), entity);
     }
 

@@ -5,7 +5,7 @@ abstract class FileSystemEntity {
                                 
     protected String name;
     protected LocalDateTime creationDate; 
-    protected FileSystemEntity data; 
+    protected FileSystemEntity root; 
    
 
     public FileSystemEntity(String name){
@@ -19,18 +19,18 @@ abstract class FileSystemEntity {
     }
 
     public FileSystemEntity getParent() {
-        return data;
+        return root;
     }
 
     public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
-    public void setData(FileSystemEntity data) {
+    public void setRoot(FileSystemEntity data) {
         if (data == null) {
             throw new IllegalArgumentException("Parent must not be null.");
         }
-        this.data = data;
+        this.root = data;
     }
 
     abstract String getDetails(String indent);

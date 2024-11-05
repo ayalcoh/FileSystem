@@ -43,10 +43,10 @@ public class FileSystemTest {
             fs.addFile("documents", "test.txt", -1);
             fail("Should have thrown IllegalArgumentException");
         } catch (IllegalArgumentException e) {
-            System.out.println("Successfully caught invalid file size exception");
+            System.out.println("Caught invalid file size exception");
         }
         
-        System.out.println("Test completed successfully!");
+        System.out.println("Test completed!");
     }
     
     @Test
@@ -66,7 +66,7 @@ public class FileSystemTest {
         assertEquals("big.txt", biggest);
         System.out.println("Verified 'big.txt' is the biggest file");
         
-        System.out.println("Test completed successfully!");
+        System.out.println("Test completed!");
     }
     
     @Test
@@ -86,10 +86,10 @@ public class FileSystemTest {
             fs.getSizeOfFile("test.txt");
             fail("Should have thrown IllegalArgumentException");
         } catch (IllegalArgumentException e) {
-            System.out.println("Successfully verified file was deleted");
+            System.out.println("Verified file was deleted");
         }
         
-        System.out.println("Test completed successfully!");
+        System.out.println("Test completed!");
     }
 
     // Additional comprehensive tests
@@ -108,7 +108,7 @@ public class FileSystemTest {
         assertEquals(100, fs.getSizeOfFile("deep.txt"));
         System.out.println("Verified file in deep directory");
         
-        System.out.println("Test completed successfully!");
+        System.out.println("Test completed!");
     }
 
     @Test
@@ -121,9 +121,9 @@ public class FileSystemTest {
             fs.addFile("root", longName, 100);
             fail("Should have thrown IllegalArgumentException for long filename");
         } catch (IllegalArgumentException e) {
-            System.out.println("Successfully caught long filename exception");
+            System.out.println("Caught long filename exception");
         }
         
-        System.out.println("Test completed successfully!");
+        System.out.println("Test completed!");
     }
 }

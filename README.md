@@ -1,22 +1,21 @@
-# FileSystem Class Complexity Summary
+## Time and Space Complexity Analysis
 
-| Function              | Description                                   | Time Complexity                    | Space Complexity                 |
-|-----------------------|-----------------------------------------------|------------------------------------|----------------------------------|
-| `addFile`             | Adds a new File under the Directory branch    | \(O(1)\)                           | \(O(1)\)                         |
-| `addDir`              | Adds a new directory under specified parent   | \(O(1)\)                           | \(O(1)\)                         |
-| `getSizeOfFile`       | Returns the size of the specified file        | \(O(1)\)                           | \(O(1)\)                         |
-| `getMaxSizeFile`      | Returns name of the file with the maximum size| \(O(1)\)                           | \(O(1)\)                         |
-| `showFileSystem`      | Displays structure of the file system         | \(O(n)\), \(n =\) total entities   | \(O(h)\), \(h =\) tree height    |
-| `delete` (file)       | Deletes a file                                | \(O(1)\) or \(O(m)\)*              | \(O(1)\)                         |
-| `delete` (directory)  | Deletes a directory and its descendants       | \(O(n)\)** or \(O(m)\)*            | \(O(n)\) for deleting directory  |
-| `getNewBiggestFile`   | Finds and updates the largest file in system  | \(O(m)\), \(m =\) total files      | \(O(1)\)                         |
+| Operation | Time Complexity | Space Complexity | Description |
+|-----------|----------------|------------------|-------------|
+| addFile | O(1) | O(1) | Uses HashMap for instant parent lookup and insertion |
+| addDir | O(1) | O(1) | Similar to addFile, constant time directory creation |
+| getFileSize | O(1) | O(1) | Direct HashMap lookup for file information |
+| getBiggestFile | O(1) | O(1) | Maintains tracked reference to largest file |
+| showFileSystem | O(n) | O(h) | Traverses all n entities, recursion depth h |
+| delete (file) | O(1) or O(n)* | O(1) | O(1) for regular files, O(n) only if deleting biggest file |
+| delete (directory) | O(n) | O(n) | Must process all n descendants in directory |
 
-### Notes
+where:
+- n = total number of entities in the system
+- h = height of the directory tree
+- *O(n) only when deleting the biggest file as we need to scan all files to find the new biggest file.An alternative approach could make delete of biggest file aswell O(1) but would make getBiggestFile O(n) - current design assumes getBiggestFile is called more frequently.
 
-This time complexity assuming that getSizeOfFile function is being called more frequently then the delete function.
-Deleting a file can also be `O(1)` in every call but it will cost with more running time for the getSizeOfFile function.
+- Including JUnit for testing functionalities.
 
-- **For `delete`**:
-    - If the file or the directory that has the largest file is being deleted, the time complexity includes an `O(m)` operation for re-evaluating the largest file.
-    - For directory deletion, `O(n)` denotes removing all descendants recursively.
+
   
